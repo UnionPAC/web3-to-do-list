@@ -9,7 +9,7 @@ const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [allTasks, setAllTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const contractAddress = "0x3abE2BC7f622946E1827b2448575b31CdCf465D3";
+  const contractAddress = "0x888B2fDE4442172a76cb05E5E48dc940dcf16D3E";
 
   // Check if user is connected
   const checkIfWalletConnected = async () => {
@@ -70,7 +70,6 @@ const App = () => {
           signer
         );
 
-        
         const tasks = await TodoListContract.getTasks();
         setIsLoading(true);
 
@@ -85,10 +84,11 @@ const App = () => {
         setIsLoading(false);
         console.log(tasksArr);
         setAllTasks(tasksArr);
-        
+
         // Get Task Count
         const taskCount = await TodoListContract.getTaskCount();
-        const completedTasks = document.getElementsByClassName("checked").length;
+        const completedTasks =
+          document.getElementsByClassName("checked").length;
         console.log(taskCount.toNumber());
         setTaskCount(taskCount.toNumber() - completedTasks);
       }
@@ -197,9 +197,11 @@ const App = () => {
         placeholder="Enter task here..."
       />
       <button onClick={addTask}>+ Add Task</button>
-      <p
-        style={{ padding: "40px 10px 20px", fontStyle: "italic" }}
-      >{`There are ${taskCount} tasks to complete!`}</p>
+      <p style={{ padding: "40px 10px 20px", fontStyle: "italic" }}>
+        {!taskCount
+          ? "You've completed all tasks!"
+          : `Tasks to complete: ${taskCount}`}
+      </p>
       {isLoading && (
         <img style={{ marginTop: "30px" }} src={loading} width="200px" />
       )}
@@ -242,7 +244,6 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletConnected();
-    
   }, []);
 
   return (
