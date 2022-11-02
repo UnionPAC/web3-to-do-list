@@ -1,5 +1,7 @@
 # To-do List App built w/ Web3 🦄
 
+*Note: This Dapp only work on the Goerli testnet*
+
 In my journey to learn more about building dApps I decided to do a basic To-do list App
 in order to ensure basic CRUD functionality.
 
